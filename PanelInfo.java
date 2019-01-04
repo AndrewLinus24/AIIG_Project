@@ -13,12 +13,29 @@ import javax.swing.JPanel;
 
 public class PanelInfo extends JPanel{
 	
-	private Integer time_left = 25;
-	private Integer life = 3;
-	private Integer level = 1;
+	private Integer time_Left, life, level;
 	private JLabel label_This;
 	private JButton button_Exit;
 	
+	public Integer getTime_Left() {
+		return time_Left;
+	}
+	public void setTime_Left(Integer time_Left) {
+		this.time_Left = time_Left;
+	}
+	public Integer getLife() {
+		return life;
+	}
+	public void setLife(Integer life) {
+		this.life = life;
+	}
+	public Integer getLevel() {
+		return level;
+	}
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
 	public PanelInfo() {
 		setBounds(800, 0, 400, 800);
 		setLayout(null);
@@ -29,10 +46,9 @@ public class PanelInfo extends JPanel{
 		label_This.addMouseListener(new MouseListener() {
 			public void mouseReleased(MouseEvent e) {}
 			public void mousePressed(MouseEvent e) {}
-			public void mouseExited(MouseEvent e) {
-//				remove(button_Exit);
-			}
+			public void mouseExited(MouseEvent e) {}
 			public void mouseEntered(MouseEvent e) {
+				label_This.setForeground(new Color(0, 195, 229));
 				add(button_Exit);
 			}
 			public void mouseClicked(MouseEvent e) {}
@@ -49,6 +65,13 @@ public class PanelInfo extends JPanel{
 			public void mouseEntered(MouseEvent e) {}
 			public void mouseClicked(MouseEvent e) {}
 		});
+		reset();
+	}
+	
+	public void reset(){
+		time_Left = 25;
+		life = 3;
+		level = 1;
 	}
 	
 	public void paint(Graphics g){
@@ -58,9 +81,11 @@ public class PanelInfo extends JPanel{
 		g2d.drawString("Find the X-it", 705, 100);
 		g2d.setFont(new Font("Arial", Font.BOLD, 16));
 		g2d.drawString("Time Left: ", 75, 150);
-		g2d.drawString(time_left.toString(), 175, 150);
+		g2d.drawString(time_Left.toString(), 175, 150);
 		g2d.drawString("Life: ", 75, 175);
+		g2d.setColor(new Color(237, 2, 10));
 		g2d.drawString(life.toString(), 175, 175);
+		g2d.setColor(Color.BLACK);
 		g2d.drawString("Level: ", 75, 200);
 		g2d.drawString(level.toString(), 175, 200);
 		g2d.setColor(new Color(0, 195, 229));
@@ -84,20 +109,16 @@ public class PanelInfo extends JPanel{
 		g2d.drawString("to show exit button", 169, 500);
 	}
 	
-	public void resetTime(){
-		time_left = 25;
+	public void increaseTime(){
+		time_Left++;
 	}
 	public void decreaseTime(){
-		time_left--;
-	}
-	public void resetLife(){
-		life = 3;
+		if(time_Left > 0){
+			time_Left--;
+		}
 	}
 	public void decreaseLife(){
 		life--;
-	}
-	public void resetLevel(){
-		level = 1;
 	}
 	public void increaseLevel(){
 		level++;
